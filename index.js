@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const morgan = require('morgan');
 const path = require('path');
-
+const adminroutes = require("./routes/adminroutes");
 const app = express();
 
 const port = process.env.PORT || 3500;
@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     res.send('Testing!');
 });
 
-
+app.use("/api", adminroutes);
 
 app.get("*", (req, res) => {
     res.status(404).json({
