@@ -11,6 +11,7 @@ const actualiteRoute = require("./routes/actualiteroutes");
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const app = express();
 const authRoutes = require('./routes/authRoutes');
+const postulationRoutes = require('./routes/postulationRoutes');
 
 const port = process.env.PORT || 3500;
 
@@ -36,6 +37,7 @@ app.use("/api", actualiteRoute);
 app.use("/api", portfolioRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api", offreroutes);
+app.use("/api", postulationRoutes);
 
 app.get("*", (req, res) => {
     res.status(404).json({
