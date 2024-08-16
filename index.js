@@ -6,6 +6,8 @@ const cors = require("cors");
 const morgan = require('morgan');
 const path = require('path');
 const adminroutes = require("./routes/adminroutes");
+const actualiteRoute = require("./routes/actualiteroutes");
+const portfolioRoutes = require('./routes/portfolioRoutes');
 const app = express();
 
 const port = process.env.PORT || 3500;
@@ -28,6 +30,8 @@ app.get('/', (req, res) => {
 });
 
 app.use("/api", adminroutes);
+app.use("/api", actualiteRoute);
+app.use("/api", portfolioRoutes);
 
 app.get("*", (req, res) => {
     res.status(404).json({
