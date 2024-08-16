@@ -6,6 +6,7 @@ const cors = require("cors");
 const morgan = require('morgan');
 const path = require('path');
 const adminroutes = require("./routes/adminroutes");
+const offreroutes = require("./routes/offreroutes");
 const actualiteRoute = require("./routes/actualiteroutes");
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const app = express();
@@ -34,6 +35,7 @@ app.use("/api", adminroutes);
 app.use("/api", actualiteRoute);
 app.use("/api", portfolioRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api", offreroutes);
 
 app.get("*", (req, res) => {
     res.status(404).json({
