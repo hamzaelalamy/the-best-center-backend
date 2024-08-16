@@ -22,7 +22,7 @@ const postulationSchema = new mongoose.Schema({
     },
     cv: {
         type: String,
-        required: true
+        // required: true
     },
     socials: {
         type: String,

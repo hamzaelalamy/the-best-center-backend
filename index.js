@@ -13,7 +13,7 @@ const offerRoutes = require("./routes/offreroutes");
 const actualiteRoute = require("./routes/actualiteroutes");
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const authRoutes = require('./routes/authRoutes');
-const postulationRoutes = require('./routes/postulationRoutes');    
+const postulationRoutes = require('./routes/postulationRoutes');
 
 
 const port = process.env.PORT || 3500;
@@ -23,7 +23,10 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
