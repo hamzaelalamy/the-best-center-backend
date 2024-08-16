@@ -19,7 +19,6 @@ const postulationSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-        required: true
     },
     cv: {
         type: String,
@@ -27,7 +26,6 @@ const postulationSchema = new mongoose.Schema({
     },
     socials: {
         type: String,
-        required: true
     },
     cover: {
         type: String
