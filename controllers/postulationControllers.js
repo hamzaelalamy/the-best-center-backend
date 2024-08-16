@@ -1,39 +1,50 @@
 const Postulation = require('../models/Postulation');
-const cloudinary = require('../config/cloudinary');
+const cloudinary = require("cloudinary").v2;
+
+const CLOUDINARY_CLOUD_NAME = "drqovuycp";
+const CLOUDINARY_API_KEY = "327936142615247";
+const CLOUDINARY_API_SECRET = "BsOlTM1rR48wUP5eCg_j_OdYrnE";
+
+cloudinary.config({
+    cloud_name: CLOUDINARY_CLOUD_NAME,
+    api_key: CLOUDINARY_API_KEY,
+    api_secret: CLOUDINARY_API_SECRET,
+});
 
 exports.createPostulation = async (req, res) => {
-    console.log("data ", req.body);
-    console.log("file ", req.file);
     try {
         if (!req.file) {
-            return res.status(400).send({ error: "Image is required" });
+            return res.status(400).send({ error: "Postulation cv is required" });
         }
+
+        const { nom, prenom, cv, phone, email, offre } = req.body;
 
         const result = await cloudinary.uploader.upload(req.file.path, {
             folder: "postulation",
         });
 
-        const postulation = new Postulation({
-            ...req.body,
-            image: result.secure_url,
+        const newPostulation = new Postulation({
+            nom,
+            prenom,
+            cv,
+            phone,
+            email,
+            offre,
+            cv: result.secure_url
         });
-        const savedPostulation = await postulation.save();
-
-        fs.unlinkSync(req.file.path);
-
-        res.status(201).json(savedPostulation);
+        await newPostulation.save();
+        res
+            .status(201)
+            .json({
+                success: true,
+                message: "Successfully Postulation added",
+                actualite: newPostulation,
+            });
     } catch (error) {
-        if (req.file) {
-            fs.unlinkSync(req.file.path);
-        }
-
         if (error.name === "ValidationError") {
             return res.status(400).json({ error: error.message });
-        } else if (error.http_code) {
-            return res.status(error.http_code).json({ error: error.message });
         } else {
-            console.error(error);
-            res.status(500).json({ error: "An unexpected error occurred" });
+            res.status(500).json({ error: error.message });
         }
     }
 };

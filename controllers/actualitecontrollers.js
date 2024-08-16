@@ -61,9 +61,8 @@ const createActualites = async (req, res) => {
       description,
       category,
       eventDate,
-      image: result.secure_url, // Save URL of the image
+      image: result.secure_url
     });
-
     await newActualites.save();
     res
       .status(201)
