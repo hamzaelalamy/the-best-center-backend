@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const path = require('path');
 const adminroutes = require("./routes/adminroutes");
 const app = express();
+const authRoutes = require('./routes/authRoutes');
 
 const port = process.env.PORT || 3500;
 
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.use("/api", adminroutes);
+app.use("/api/auth", authRoutes);
 
 app.get("*", (req, res) => {
     res.status(404).json({
