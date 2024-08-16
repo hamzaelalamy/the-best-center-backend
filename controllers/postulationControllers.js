@@ -17,29 +17,35 @@ exports.createPostulation = async (req, res) => {
             return res.status(400).send({ error: "Postulation cv is required" });
         }
 
-        const { nom, prenom, cv, phone, email, offre } = req.body;
+        const { nom, prenom, email, offre, phone, socials, cover } = req.body;
 
+        // Upload CV to Cloudinary
         const result = await cloudinary.uploader.upload(req.file.path, {
             folder: "postulation",
         });
 
-        const newPostulation = new Postulation({
+        // Create an object with only the required fields
+        const postulationData = {
             nom,
             prenom,
-            cv,
-            phone,
             email,
             offre,
             cv: result.secure_url
-        });
+        };
+
+        // Add optional fields if they are provided
+        if (phone) postulationData.phone = phone;
+        if (socials) postulationData.socials = socials;
+        if (cover) postulationData.cover = cover;
+
+        const newPostulation = new Postulation(postulationData);
         await newPostulation.save();
-        res
-            .status(201)
-            .json({
-                success: true,
-                message: "Successfully Postulation added",
-                actualite: newPostulation,
-            });
+
+        res.status(201).json({
+            success: true,
+            message: "Postulation Successfully added",
+            postulation: newPostulation,
+        });
     } catch (error) {
         if (error.name === "ValidationError") {
             return res.status(400).json({ error: error.message });
