@@ -33,6 +33,10 @@ const offreSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Qualifications: {
+        type: String,
+        required: true
+    },
 
 }, { timestamps: true });
 
