@@ -1,4 +1,4 @@
-const Postulation = require("../models/Postulation.js");
+const Postulation = require("../models/postulation.js");
 const { sendNewsletter } = require("../utils/newsletter.js");
 
 exports.sendNewOffers = async (req, res) => {
