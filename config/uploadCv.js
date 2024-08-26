@@ -2,9 +2,9 @@ const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
 
-const portfolioStorage = multer.diskStorage({
+const cvStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadPath = path.join("uploads", "portfolios");
+        const uploadPath = path.join("uploads", "cv");
         fs.mkdirSync(uploadPath, { recursive: true });
         cb(null, uploadPath);
     },
@@ -13,6 +13,6 @@ const portfolioStorage = multer.diskStorage({
     },
 });
 
-const uploadPortfolio = multer({ storage: portfolioStorage });
+const uploadCv = multer({ storage: cvStorage });
 
-module.exports = { uploadPortfolio };
+module.exports = { uploadCv };
