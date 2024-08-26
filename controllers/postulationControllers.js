@@ -1,6 +1,5 @@
-const Postulation = require('../models/Postulation');
+const Postulation = require('../models/postulation');
 const cloudinary = require("cloudinary").v2;
-
 const CLOUDINARY_CLOUD_NAME = "drqovuycp";
 const CLOUDINARY_API_KEY = "327936142615247";
 const CLOUDINARY_API_SECRET = "BsOlTM1rR48wUP5eCg_j_OdYrnE";
@@ -23,7 +22,10 @@ exports.createPostulation = async (req, res) => {
         const result = await cloudinary.uploader.upload(req.file.path, {
             folder: "postulation",
         });
+        console.log(result);
 
+
+        const newPostulation = new Postulation({
         // Create an object with only the required fields
         const postulationData = {
             nom,
@@ -84,6 +86,23 @@ exports.getPostulationById = async (req, res) => {
         } else {
             res.status(500).json({ error: error.message });
         }
+    }
+};
+
+exports.getUrlfile = async (req, res) => {
+    const { fileId } = req.params;
+    const fileUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+
+    try {
+        const response = await axios.get(fileUrl, {
+            responseType: 'arraybuffer',
+        });
+
+        res.set('Content-Type', response.headers['content-type']);
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error fetching file from Google Drive:', error);
+        res.status(500).send('Failed to fetch file from Google Drive');
     }
 };
 

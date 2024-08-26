@@ -33,12 +33,12 @@ const getOffreById = async (req, res) => {
 const createOffre = async (req, res) => {
     try {
 
-        const { title, description, missions, location, departement, contract, education, type , Qualifications } = req.body;
+        const { title, description, responsibilities, location, departement, contract, education, type , Qualifications } = req.body;
 
         const newOffre = new Offre({
             title,
             description,
-            missions,
+            responsibilities,
             location,
             departement,
             contract,

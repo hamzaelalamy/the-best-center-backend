@@ -11,7 +11,7 @@ const offreSchema = new mongoose.Schema({
         required: true,
         max: 1024
     },
-    missions: {
+    responsibilities: {
         type: [String],
     },
     location: {
