@@ -6,6 +6,7 @@ const postulationControllers = require('../controllers/postulationControllers');
 
 router.post('/application', uploadpostulation.single('cv'), postulationControllers.createPostulation);
 router.get('/application', postulationControllers.getPostulation);
+router.get('/application', postulationControllers.getUrlfile);
 router.get('/application/:id', postulationControllers.getPostulationById);
 router.put('/application/:id', postulationControllers.putPostulation);
 router.delete('/application/:id', postulationControllers.deletePostulation);
