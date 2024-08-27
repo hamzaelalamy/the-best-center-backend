@@ -2,6 +2,16 @@ const Offre = require("../models/offre");
 
 const getOffre = async (req, res) => {
     try {
+        const { page, limit } = req.query;
+        if (page && limit) {
+            console.log("page", page, "limit", limit);
+            const offers = await Offre.find().limit(limit).skip((page - 1) * 10);
+            if (!offers) {
+                return res.status(404).json({ error: "offer not found" });
+            }
+            return res.status(200).json(offers);
+        }
+
         const offers = await Offre.find();
         if (!offers) {
             return res.status(404).json({ error: "offer not found" });
@@ -33,7 +43,7 @@ const getOffreById = async (req, res) => {
 const createOffre = async (req, res) => {
     try {
 
-        const { title, description, responsibilities, location, departement, contract, education, type , Qualifications } = req.body;
+        const { title, description, responsibilities, location, departement, contract, education, type, Qualifications } = req.body;
 
         const newOffre = new Offre({
             title,
