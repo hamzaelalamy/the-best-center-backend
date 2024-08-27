@@ -3,7 +3,6 @@ const fs = require("fs").promises;
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const dotenv = require("dotenv");
-
 dotenv.config();
 
 cloudinary.config({
