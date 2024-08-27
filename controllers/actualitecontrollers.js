@@ -2,15 +2,13 @@ const Actualites = require("../models/actualites");
 const fs = require("fs").promises;
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
-
-const CLOUDINARY_CLOUD_NAME = "drqovuycp";
-const CLOUDINARY_API_KEY = "327936142615247";
-const CLOUDINARY_API_SECRET = "BsOlTM1rR48wUP5eCg_j_OdYrnE";
+const dotenv = require("dotenv");
+dotenv.config();
 
 cloudinary.config({
-  cloud_name: CLOUDINARY_CLOUD_NAME,
-  api_key: CLOUDINARY_API_KEY,
-  api_secret: CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 const getActualites = async (req, res) => {
