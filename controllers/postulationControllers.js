@@ -2,6 +2,7 @@ const Postulation = require('../models/Postulation');
 const { google } = require('googleapis');
 const dotenv = require("dotenv");
 dotenv.config();
+
 // Function to dynamically generate redirect URL based on jobId
 function generateRedirectUri(jobId) {
   return `http://localhost:9000/jobs/${jobId}/apply`;

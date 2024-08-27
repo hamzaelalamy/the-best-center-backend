@@ -11,7 +11,7 @@ const offreSchema = new mongoose.Schema({
         required: true,
         max: 1024
     },
-    missions: {
+    responsibilities: {
         type: [String],
     },
     location: {
@@ -30,6 +30,10 @@ const offreSchema = new mongoose.Schema({
         type: String,
     },
     type: {
+        type: String,
+        required: true
+    },
+    Qualifications: {
         type: String,
         required: true
     },

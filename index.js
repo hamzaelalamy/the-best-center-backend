@@ -31,6 +31,7 @@ const actualiteRoute = require("./routes/actualiteroutes");
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const authRoutes = require('./routes/authRoutes');
 const postulationRoutes = require('./routes/postulationRoutes');
+const newsletterRoutes = require('./routes/newsletterRoutes');
 
 app.use("/api", adminroutes);
 app.use("/api", actualiteRoute);
@@ -38,6 +39,7 @@ app.use("/api", portfolioRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api", offerRoutes);
 app.use("/api", postulationRoutes);
+app.use("/api", newsletterRoutes);
 
 // Handle 404 errors
 app.get("*", (req, res) => {
