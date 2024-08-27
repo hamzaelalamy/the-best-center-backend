@@ -1,4 +1,4 @@
-const Postulation = require('../models/Postulation');
+const Postulation = require('../models/postulation');
 const { google } = require('googleapis');
 const dotenv = require("dotenv");
 dotenv.config();
