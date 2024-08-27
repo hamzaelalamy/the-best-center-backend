@@ -1,4 +1,4 @@
-const Postulation = require('../models/Postulation');
+const Postulation = require('../models/postulation');
 const cloudinary = require("cloudinary").v2;
 const dotenv = require("dotenv");
 dotenv.config();
